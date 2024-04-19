@@ -20,6 +20,8 @@ public class Move : MonoBehaviour
      */
     void LateUpdate()
     {
+        //offset만큼 뒤에 있어야 한다.
         transform.position = playerTrasnform.position + offset;
     }
+
 }

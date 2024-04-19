@@ -70,11 +70,14 @@ public class PlayerBall : MonoBehaviour
                 /*game clear
                  *원래는 다음에 올 Scene을 Load해야 한다.
                  */
-                SceneManager.LoadScene("NextLevel");
+                if (manager.stage == 2)
+                    SceneManager.LoadScene(0);
+                else
+                    SceneManager.LoadScene(manager.stage + 1);
             }
             else
             {   /*restart*/
-                SceneManager.LoadScene("Basic_3DGame");
+                SceneManager.LoadScene(manager.stage);
             }
         }
     }

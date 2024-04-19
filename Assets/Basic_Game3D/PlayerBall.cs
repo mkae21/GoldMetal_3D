@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // restart 하기 위해서 꼭 가져와야 함
 
 public class PlayerBall : MonoBehaviour
 {
     public float jumpPower;
     bool isJump;
     public int itemCount;
-
+    public GameManagerLogic manager;
     Rigidbody rigid;
     private void Awake()
     {
@@ -59,6 +60,22 @@ public class PlayerBall : MonoBehaviour
              */
             itemCount++;            
             other.gameObject.SetActive(false);
+        }
+        else if(other.tag == "Point")
+        {   
+            //Find 계열의 함수는 부하를 초래할 수 있으므로 피하는 것을 권장, 최적화가 중요하다면 사용 안함
+            //GameObject.FindGameObjectsWithTag();
+            if(itemCount == manager.totalItemCount)
+            {
+                /*game clear
+                 *원래는 다음에 올 Scene을 Load해야 한다.
+                 */
+                SceneManager.LoadScene("NextLevel");
+            }
+            else
+            {   /*restart*/
+                SceneManager.LoadScene("Basic_3DGame");
+            }
         }
     }
 }
